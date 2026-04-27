@@ -1,13 +1,18 @@
 export default {
   async fetch(request, env) {
 
-    const result = await env.AI.run(
-      "@cf/meta/llama-3-8b-instruct",
-      {
-        prompt: "こんにちはってギャル風に言って"
-      }
-    );
+    try {
+      const result = await env.AI.run(
+        "@cf/meta/llama-3-8b-instruct",
+        {
+          prompt: "テスト"
+        }
+      );
 
-    return new Response(result.response);
+      return new Response(JSON.stringify(result));
+
+    } catch (e) {
+      return new Response("ERROR: " + e.message);
+    }
   }
 };
